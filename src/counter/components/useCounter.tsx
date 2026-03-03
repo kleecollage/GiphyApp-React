@@ -13,7 +13,7 @@ export const useCounter = (initialValue: number = 10) => {
         setCounter(counter - 1);
         break;
       case 'reset':
-        setCounter(5);
+        setCounter(counter);
         break;
       default:
         break;
@@ -23,7 +23,6 @@ export const useCounter = (initialValue: number = 10) => {
   return {
     // Values | Properties
     counter,
-
     // Methods | Actions
     handleButtons
   }

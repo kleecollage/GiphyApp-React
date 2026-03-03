@@ -2,7 +2,7 @@ import { useCounter } from "./components/useCounter"
 
 export const MyCounterApp = () => {
   const { counter, handleButtons } = useCounter(100);
-  
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems:'center' }}>
       <h1>MyCounterApp</h1>
@@ -14,4 +14,5 @@ export const MyCounterApp = () => {
       </div>
     </div>
   )
+  
 }
