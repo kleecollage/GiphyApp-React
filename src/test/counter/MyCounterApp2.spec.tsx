@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { MyCounterApp } from "../../counter/MyCounterApp";
 
 const handleButtons = vi.fn();
@@ -20,15 +20,29 @@ describe('MyCounterApp', () => {
     expect(screen.getByRole('button', {name: 'Reset'})).toBeDefined();
   })
 
-  test('should call handleButton if button is clicked', () => {
+  beforeEach(() => {
+    handleButtons.mockClear();
+  });
+
+  test('should call handleButtons with "add" when +1 is clicked', () => {
     render(<MyCounterApp />);
-    const button = screen.getByRole('button', {name: '+1'});
-    fireEvent.click(button);
-    expect(handleButtons).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', {name: '+1'}));
     expect(handleButtons).toHaveBeenCalledTimes(1);
-  })
+    expect(handleButtons).toHaveBeenCalledWith('add');
+  });
 
+  test('should call handleButtons with "subtract" when -1 is clicked', () => {
+    render(<MyCounterApp />);
+    fireEvent.click(screen.getByRole('button', {name: '-1'}));
+    expect(handleButtons).toHaveBeenCalledTimes(1);
+    expect(handleButtons).toHaveBeenCalledWith('subtract');
+  });
 
-
+  test('should call handleButtons with "reset" when Reset is clicked', () => {
+    render(<MyCounterApp />);
+    fireEvent.click(screen.getByRole('button', {name: 'Reset'}));
+    expect(handleButtons).toHaveBeenCalledTimes(1);
+    expect(handleButtons).toHaveBeenCalledWith('reset');
+  });
 
 })
